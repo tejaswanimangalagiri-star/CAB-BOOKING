@@ -1,0 +1,413 @@
+# Technical Architecture – Full Stack Cab Booking System
+
+## High-Level Architecture
+
+```text
+                        +----------------------+
+                        |    Web Browser       |
+                        |  (React Frontend)    |
+                        +----------+-----------+
+                                   |
+                              HTTPS/REST
+                                   |
+                        +----------v-----------+
+                        |   Node.js + Express  |
+                        |      Backend API     |
+                        +----------+-----------+
+                                   |
+            +----------------------+----------------------+
+            |                      |                      |
+            |                      |                      |
+     +------v------+       +-------v-------+      +-------v-------+
+     | MongoDB     |       | Socket.IO     |      | Google Maps   |
+     | Database    |       | Real-Time     |      | API           |
+     +-------------+       +---------------+      +---------------+
+            |                      |                      |
+            |                      |                      |
+     +------v------+       +-------v-------+      +-------v-------+
+     | Cloudinary  |       | Razorpay      |      | Email Service |
+     | Image Store |       | Payment       |      | Notifications |
+     +-------------+       +---------------+      +---------------+
+```
+
+---
+
+# Three-Tier Architecture
+
+## 1. Presentation Layer (Frontend)
+
+Technology:
+
+* React.js
+* Tailwind CSS
+* React Router
+* Axios
+
+Responsibilities:
+
+* User Interface
+* Login & Registration
+* Ride Booking
+* Ride Tracking
+* Driver Dashboard
+* Admin Dashboard
+* Payment Screen
+
+---
+
+## 2. Business Logic Layer (Backend)
+
+Technology:
+
+* Node.js
+* Express.js
+
+Responsibilities:
+
+* Authentication
+* Authorization
+* Fare Calculation
+* Ride Assignment
+* Payment Processing
+* Driver Matching
+* Notification Service
+* API Management
+
+---
+
+## 3. Data Layer
+
+Technology:
+
+* MongoDB
+* Mongoose
+
+Collections:
+
+* Users
+* Drivers
+* Vehicles
+* Rides
+* Payments
+* Ratings
+
+---
+
+# System Components
+
+```text
+                React Frontend
+                       |
+      ------------------------------
+      |            |              |
+      |            |              |
+ Authentication  Booking      Dashboard
+      |            |              |
+      ------------------------------
+                |
+         Express API Server
+                |
+--------------------------------------------
+|        |         |        |        |
+Users  Drivers   Booking  Payment  Admin
+Controller Controller Controller Controller
+                |
+--------------------------------------------
+|        |         |        |        |
+MongoDB Socket.IO Razorpay Google Maps
+```
+
+---
+
+# Backend Folder Architecture
+
+```text
+server/
+│
+├── config/
+│     database.js
+│     cloudinary.js
+│
+├── controllers/
+│     authController.js
+│     rideController.js
+│     userController.js
+│     driverController.js
+│     paymentController.js
+│
+├── middleware/
+│     auth.js
+│     role.js
+│     upload.js
+│     errorHandler.js
+│
+├── models/
+│     User.js
+│     Driver.js
+│     Ride.js
+│     Vehicle.js
+│     Payment.js
+│
+├── routes/
+│     authRoutes.js
+│     userRoutes.js
+│     rideRoutes.js
+│     driverRoutes.js
+│     paymentRoutes.js
+│
+├── services/
+│     fareService.js
+│     mapService.js
+│     paymentService.js
+│     notificationService.js
+│
+├── sockets/
+│     rideSocket.js
+│
+├── utils/
+│     helpers.js
+│
+├── app.js
+└── server.js
+```
+
+---
+
+# Frontend Folder Architecture
+
+```text
+client/
+│
+├── src/
+│
+├── assets/
+│
+├── components/
+│     Navbar
+│     Footer
+│     RideCard
+│     Map
+│     Sidebar
+│
+├── pages/
+│     Home
+│     Login
+│     Register
+│     Dashboard
+│     BookRide
+│     Payment
+│     Profile
+│     RideHistory
+│
+├── context/
+│     AuthContext
+│
+├── hooks/
+│
+├── services/
+│     api.js
+│
+├── utils/
+│
+├── App.jsx
+└── main.jsx
+```
+
+---
+
+# Authentication Flow
+
+```text
+User Login
+     |
+     ▼
+Frontend
+     |
+     ▼
+Express API
+     |
+Check Email
+     |
+Check Password
+     |
+Generate JWT
+     |
+Return Token
+     |
+Store Token
+     |
+Protected Routes
+```
+
+---
+
+# Ride Booking Flow
+
+```text
+User Login
+      |
+      ▼
+Enter Pickup
+      |
+      ▼
+Enter Destination
+      |
+      ▼
+Google Maps
+Calculates Distance
+      |
+      ▼
+Fare Calculation
+      |
+      ▼
+Ride Created
+      |
+      ▼
+Search Available Drivers
+      |
+      ▼
+Socket.IO Notification
+      |
+      ▼
+Driver Accepts
+      |
+      ▼
+Ride Starts
+      |
+      ▼
+Live Tracking
+      |
+      ▼
+Ride Ends
+      |
+      ▼
+Payment
+      |
+      ▼
+Rating
+```
+
+---
+
+# Database Architecture
+
+```text
+Users
+   |
+   | 1
+   |
+   |--------< Books >--------*
+                              |
+                              |
+                            Rides
+                              |
+                    --------------------
+                    |                  |
+                    |                  |
+                  Driver            Payment
+                    |
+                    |
+                Vehicle
+```
+
+---
+
+# API Architecture
+
+```text
+Client
+
+↓
+
+API Gateway
+
+↓
+
+Authentication Middleware
+
+↓
+
+Role Authorization
+
+↓
+
+Controllers
+
+↓
+
+Services
+
+↓
+
+Database
+```
+
+---
+
+# Security Architecture
+
+```text
+Client
+   |
+HTTPS
+   |
+JWT Authentication
+   |
+Role-Based Authorization
+   |
+Input Validation
+   |
+Password Hashing (bcrypt)
+   |
+MongoDB
+```
+
+Security features include:
+
+* JWT-based authentication
+* Password hashing with bcrypt
+* Role-based access control (User, Driver, Admin)
+* Input validation and sanitization
+* HTTPS for secure communication
+* CORS configuration
+* Rate limiting
+* Helmet security headers
+* Environment variables for secrets
+
+---
+
+# Deployment Architecture
+
+```text
+               Internet
+                    |
+            React (Vercel)
+                    |
+                 HTTPS
+                    |
+          Node.js (Render)
+                    |
+       -----------------------
+       |         |           |
+ MongoDB Atlas  Cloudinary  Razorpay
+       |
+   Database
+```
+
+---
+
+# Technology Stack Summary
+
+| Layer          | Technology                    |
+| -------------- | ----------------------------- |
+| Frontend       | React.js, Tailwind CSS, Axios |
+| Backend        | Node.js, Express.js           |
+| Database       | MongoDB, Mongoose             |
+| Authentication | JWT, bcrypt                   |
+| Real-time      | Socket.IO                     |
+| Maps           | Google Maps API               |
+| Payments       | Razorpay / Stripe             |
+| Image Storage  | Cloudinary                    |
+| Deployment     | Vercel, Render, MongoDB Atlas |
+
+This architecture is modular, scalable, and suitable for a production-style cab booking application. It separates concerns into presentation, business logic, and data layers, making the system easier to maintain and extend with features such as live tracking, notifications, and analytics.
