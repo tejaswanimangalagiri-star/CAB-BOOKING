@@ -1,0 +1,146 @@
+# ER (Entity Relationship) Diagram – Cab Booking System
+
+```text
++------------------+
+|      USERS       |
++------------------+
+| PK user_id       |
+| name             |
+| email            |
+| password         |
+| phone            |
+| role             |
+| created_at       |
++------------------+
+          |
+          | 1
+          |
+          | Books
+          |
+          | M
++------------------+
+|      RIDES       |
++------------------+
+| PK ride_id       |
+| FK user_id       |
+| FK driver_id     |
+| pickup_location  |
+| drop_location    |
+| distance         |
+| fare             |
+| ride_status      |
+| payment_status   |
+| start_time       |
+| end_time         |
++------------------+
+          |
+          | M
+          |
+          | Driven By
+          |
+          | 1
++------------------+
+|     DRIVERS      |
++------------------+
+| PK driver_id     |
+| name             |
+| email            |
+| password         |
+| phone            |
+| license_no       |
+| vehicle_id (FK)  |
+| status           |
+| current_location |
++------------------+
+          |
+          | 1
+          |
+          | Owns
+          |
+          | 1
++------------------+
+|     VEHICLES     |
++------------------+
+| PK vehicle_id    |
+| vehicle_number   |
+| vehicle_type     |
+| vehicle_model    |
+| seating_capacity |
++------------------+
+
+          |
+          | 1
+          |
+          | Has
+          |
+          | 1
++------------------+
+|    PAYMENTS      |
++------------------+
+| PK payment_id    |
+| FK ride_id       |
+| amount           |
+| payment_method   |
+| payment_status   |
+| transaction_id   |
+| payment_date     |
++------------------+
+
+          |
+          | 1
+          |
+          | Receives
+          |
+          | M
++------------------+
+|     RATINGS      |
++------------------+
+| PK rating_id     |
+| FK ride_id       |
+| FK user_id       |
+| FK driver_id     |
+| rating           |
+| review           |
+| created_at       |
++------------------+
+```
+
+## Relationship Summary
+
+| Entity 1 | Relationship | Entity 2 | Cardinality         |
+| -------- | ------------ | -------- | ------------------- |
+| User     | Books        | Ride     | 1 : Many            |
+| Driver   | Completes    | Ride     | 1 : Many            |
+| Driver   | Owns         | Vehicle  | 1 : 1               |
+| Ride     | Has          | Payment  | 1 : 1               |
+| Ride     | Has          | Rating   | 1 : 1 (or 1 : 0..1) |
+| User     | Gives        | Rating   | 1 : Many            |
+| Driver   | Receives     | Rating   | 1 : Many            |
+
+## Cardinality Overview
+
+```text
+User (1)
+   |
+   | Books
+   |
+   |------< Ride >------(1) Driver
+               |
+               |
+               |------(1) Payment
+               |
+               |
+               |------(1) Rating
+                              |
+               +--------------+
+               |              |
+            User          Driver
+
+Driver (1)
+    |
+    | Owns
+    |
+Vehicle (1)
+```
+
+This ER diagram represents a normalized database design suitable for a full-stack cab booking application, covering the core entities: **Users, Drivers, Vehicles, Rides, Payments, and Ratings**.
