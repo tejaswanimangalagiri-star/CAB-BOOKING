@@ -1,0 +1,118 @@
+### Configure MongoDB
+
+The **Cab Booking Application** uses **MongoDB** as its NoSQL database to store user information, cab details, bookings, and other application data. **Mongoose** is used as the Object Data Modeling (ODM) library to connect and interact with the MongoDB database.
+
+---
+
+## Step 1: Install MongoDB Dependencies
+
+Install **Mongoose** and **dotenv** if they are not already installed:
+
+```bash
+npm install mongoose dotenv
+```
+
+---
+
+## Step 2: Create a `.env` File
+
+Inside the **server** folder, create a `.env` file and add the following environment variables:
+
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+```
+
+> Replace `your_mongodb_connection_string` with your MongoDB Atlas or local MongoDB connection URL.
+
+---
+
+## Step 3: Create Database Configuration
+
+Inside the **config** folder, create a file named **db.js**.
+
+```javascript
+const mongoose = require("mongoose");
+
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.MONGODB_URI);
+
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.error("Database Connection Failed:", error.message);
+        process.exit(1);
+    }
+};
+
+module.exports = connectDB;
+```
+
+---
+
+## Step 4: Configure the Server
+
+Import the database connection into **server.js** and establish the connection before starting the server.
+
+```javascript
+require("dotenv").config();
+const express = require("express");
+const connectDB = require("./config/db");
+
+const app = express();
+
+connectDB();
+
+app.use(express.json());
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+```
+
+---
+
+## Step 5: Start the Server
+
+Run the backend server using:
+
+```bash
+npm run dev
+```
+
+If the connection is successful, you should see output similar to:
+
+```text
+MongoDB Connected: cluster0.xxxxx.mongodb.net
+Server running on port 5000
+```
+
+---
+
+## MongoDB Connection Workflow
+
+```text
+Application Starts
+        │
+        ▼
+Load Environment Variables (.env)
+        │
+        ▼
+Read MongoDB Connection String
+        │
+        ▼
+Connect Using Mongoose
+        │
+        ▼
+MongoDB Database
+        │
+        ▼
+Connection Successful
+        │
+        ▼
+Start Express Server.
+
+This configuration establishes a secure and reliable connection between the Express backend and MongoDB, enabling efficient storage and retrieval of application data.
