@@ -1,0 +1,178 @@
+### Backend Project Structure
+
+The backend of the **Cab Booking Application** follows the **MVC (Model-View-Controller)** architecture to ensure clean code organization, scalability, and maintainability. Each folder has a specific responsibility within the application.
+
+```text
+server/
+│
+├── config/
+│   └── db.js                  # Database connection configuration
+│
+├── controllers/
+│   ├── authController.js      # User authentication logic
+│   ├── bookingController.js   # Cab booking operations
+│   ├── cabController.js       # Cab management logic
+│   └── userController.js      # User-related operations
+│
+├── middleware/
+│   ├── authMiddleware.js      # JWT authentication middleware
+│   └── errorMiddleware.js     # Global error handling
+│
+├── models/
+│   ├── User.js                # User schema
+│   ├── Cab.js                 # Cab schema
+│   └── Booking.js             # Booking schema
+│
+├── routes/
+│   ├── authRoutes.js          # Authentication routes
+│   ├── bookingRoutes.js       # Booking API routes
+│   ├── cabRoutes.js           # Cab API routes
+│   └── userRoutes.js          # User API routes
+│
+├── utils/
+│   ├── generateToken.js       # JWT token generation
+│   └── helpers.js             # Utility/helper functions
+│
+├── .env                       # Environment variables
+├── .gitignore                 # Files ignored by Git
+├── package.json               # Project metadata and dependencies
+├── package-lock.json          # Dependency lock file
+└── server.js                  # Application entry point
+```
+
+---
+
+## Folder Description
+
+### `config/`
+
+Contains configuration files required by the application.
+
+**Example:**
+
+* `db.js` – Establishes the connection to the MongoDB database using Mongoose.
+
+---
+
+### `controllers/`
+
+Contains the **business logic** of the application. Controllers process incoming requests, interact with models, and send responses back to the client.
+
+**Examples:**
+
+* User Registration & Login
+* Cab Management
+* Booking Operations
+* Profile Management
+
+---
+
+### `middleware/`
+
+Contains middleware functions that execute before the request reaches the controller.
+
+**Examples:**
+
+* JWT Authentication
+* Authorization
+* Error Handling
+* Request Validation
+
+---
+
+### `models/`
+
+Contains **Mongoose schemas** that define the structure of data stored in MongoDB.
+
+**Examples:**
+
+* User Model
+* Cab Model
+* Booking Model
+
+---
+
+### `routes/`
+
+Defines all REST API endpoints and maps them to their respective controller functions.
+
+**Examples:**
+
+* Authentication Routes
+* User Routes
+* Cab Routes
+* Booking Routes
+
+---
+
+### `utils/`
+
+Contains reusable helper functions and utility modules that can be used throughout the application.
+
+**Examples:**
+
+* JWT Token Generation
+* Common Helper Functions
+* Custom Utilities
+
+---
+
+### `.env`
+
+Stores sensitive configuration values such as:
+
+* MongoDB Connection URI
+* JWT Secret Key
+* Server Port
+* API Keys
+
+---
+
+### `server.js`
+
+The main entry point of the backend application.
+
+**Responsibilities:**
+
+* Initialize the Express application
+* Connect to MongoDB
+* Configure middleware
+* Register API routes
+* Start the server
+
+---
+
+## Backend Request Flow
+
+```text
+Client Request
+       │
+       ▼
+Routes
+       │
+       ▼
+Middleware
+       │
+       ▼
+Controllers
+       │
+       ▼
+Models
+       │
+       ▼
+MongoDB Database
+       │
+       ▼
+Response to Client
+```
+
+---
+
+## Benefits of This Structure
+
+* **Modular Design:** Each component has a clearly defined responsibility.
+* **Easy Maintenance:** Organized folder structure simplifies debugging and updates.
+* **Scalable:** New features can be added without affecting existing modules.
+* **Reusable Code:** Controllers, middleware, and utilities can be reused across the application.
+* **Better Collaboration:** Multiple developers can work on different modules simultaneously with minimal conflicts.
+* **Improved Testing:** Individual layers can be tested independently, ensuring reliable and maintainable code.
