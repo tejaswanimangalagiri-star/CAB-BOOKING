@@ -1,0 +1,195 @@
+## Steps for Execution
+
+Follow the below steps to run the **Cab Booking Application** successfully on your local system.
+
+---
+
+## 1. Clone the Repository
+
+Clone the project repository from GitHub:
+
+```bash id="4h5h8c"
+git clone <repository-url>
+```
+
+Navigate into the project folder:
+
+```bash id="xq8d2n"
+cd Cab-Booking-Application
+```
+
+---
+
+# Backend Execution
+
+## 2. Navigate to the Server Folder
+
+Open the terminal and move to the backend directory:
+
+```bash id="3wqz3h"
+cd server
+```
+
+---
+
+## 3. Install Backend Dependencies
+
+Install all required Node.js packages:
+
+```bash id="8jzv5w"
+npm install
+```
+
+---
+
+## 4. Configure Environment Variables
+
+Create a `.env` file inside the **server** folder and add the required configuration:
+
+```env id="9s8m1d"
+PORT=5000
+
+MONGODB_URI=your_mongodb_connection_string
+
+JWT_SECRET=your_secret_key
+```
+
+Replace the values with your MongoDB connection URL and secret key.
+
+---
+
+## 5. Start the Backend Server
+
+Run the backend server using:
+
+```bash id="1j8k2v"
+npm run dev
+```
+
+If the server starts successfully, you will see:
+
+```text id="2t3v9b"
+Server is running on port 5000
+MongoDB Connected Successfully
+```
+
+The backend API will now be available at:
+
+```text id="n8q5z1"
+http://localhost:5000
+```
+
+---
+
+# Frontend Execution
+
+## 6. Navigate to the Client Folder
+
+Open another terminal window and move to the frontend directory:
+
+```bash id="4y8s2p"
+cd client
+```
+
+---
+
+## 7. Install Frontend Dependencies
+
+Install all React application packages:
+
+```bash id="6w3k9p"
+npm install
+```
+
+---
+
+## 8. Start the React Development Server
+
+Run the frontend application:
+
+```bash id="7k2m4v"
+npm run dev
+```
+
+The Vite development server will start and display:
+
+```text id="9f5r8x"
+VITE ready in XXX ms
+
+Local: http://localhost:5173/
+```
+
+Open the URL in your browser:
+
+```text id="c3x7m1"
+http://localhost:5173/
+```
+
+---
+
+# Application Execution Flow
+
+```text id="h7m9q2"
+Start MongoDB Database
+          │
+          ▼
+Run Backend Server
+(Node.js + Express)
+          │
+          ▼
+Run Frontend Server
+(React + Vite)
+          │
+          ▼
+Open Browser
+          │
+          ▼
+Use Cab Booking Application
+```
+
+---
+
+# Testing the Application
+
+### User Module
+
+* Register a new user account
+* Login using valid credentials
+* View user profile
+
+### Cab Module
+
+* View available cabs
+* Select a cab
+* Check cab availability
+
+### Booking Module
+
+* Enter pickup and drop locations
+* Confirm cab booking
+* View booking history
+* Cancel booking if required
+
+---
+
+# Common Commands Summary
+
+### Backend
+
+```bash id="z5p2q7"
+cd server
+npm install
+npm run dev
+```
+
+### Frontend
+
+```bash id="p4v8n2"
+cd client
+npm install
+npm run dev
+```
+
+---
+
+After completing these steps, the **Cab Booking Application** will be running locally with the **React frontend connected to the Node.js/Express backend and MongoDB database**.
