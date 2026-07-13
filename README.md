@@ -2,6 +2,8 @@ A **Cab Booking Full Stack Project** is a great portfolio project because it com
 
 ## Project Title
 
+This project demonstrates a complete full-stack cab booking system with user-friendly features.
+
 **CabGo – Full Stack Cab Booking System**
 
 ## Tech Stack
