@@ -16,7 +16,7 @@ The application is organized into multiple folders, each with a specific respons
 Authentication is implemented using **JSON Web Tokens (JWT)** to provide secure access to protected routes. User passwords are encrypted using **bcryptjs** before being stored in the database, ensuring that sensitive information remains secure. Middleware verifies JWT tokens before allowing access to authorized resources.
 
 The backend exposes a set of RESTful APIs that support the application's core functionalities, including:
-
+* prefer user details login
 * User Registration and Login
 * User Profile Management
 * Cab Management
