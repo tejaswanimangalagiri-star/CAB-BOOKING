@@ -1,0 +1,228 @@
+### Frontend Project Structure
+
+The frontend of the **Cab Booking Application** is developed using **React.js** with **Vite**. It follows a component-based architecture, where the application is divided into reusable components, pages, and services. This structure improves code organization, scalability, and maintainability.
+
+---
+
+## Frontend Folder Structure
+
+```text
+client/
+│
+├── public/
+│   ├── favicon.ico
+│   └── assets/
+│
+├── src/
+│   ├── assets/              # Images, icons, and static files
+│   ├── components/          # Reusable UI components
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── CabCard.jsx
+│   │   └── BookingForm.jsx
+│   │
+│   ├── pages/               # Application pages
+│   │   ├── Home.jsx
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
+│   │   ├── Dashboard.jsx
+│   │   ├── BookCab.jsx
+│   │   └── Profile.jsx
+│   │
+│   ├── services/            # API service files
+│   │   ├── authService.js
+│   │   ├── bookingService.js
+│   │   └── cabService.js
+│   │
+│   ├── context/             # React Context API
+│   │   └── AuthContext.jsx
+│   │
+│   ├── hooks/               # Custom React hooks
+│   │
+│   ├── utils/               # Helper functions
+│   │
+│   ├── App.jsx              # Root component
+│   ├── main.jsx             # Entry point
+│   └── index.css            # Global styles
+│
+├── package.json
+├── vite.config.js
+└── .gitignore
+```
+
+---
+
+## Folder Description
+
+### `public/`
+
+Contains static assets that are served directly without processing.
+
+**Examples:**
+
+* Favicon
+* Static images
+* Manifest files
+
+---
+
+### `src/assets/`
+
+Stores application assets such as:
+
+* Images
+* Icons
+* Logos
+* Fonts
+
+---
+
+### `src/components/`
+
+Contains reusable UI components that can be shared across multiple pages.
+
+**Examples:**
+
+* Navigation Bar
+* Footer
+* Cab Card
+* Booking Form
+* Buttons
+* Modal Components
+
+---
+
+### `src/pages/`
+
+Contains the main pages of the application.
+
+**Examples:**
+
+* Home Page
+* Login Page
+* Registration Page
+* Dashboard
+* Book Cab Page
+* User Profile
+
+Each page combines multiple reusable components to build a complete screen.
+
+---
+
+### `src/services/`
+
+Contains functions responsible for communicating with the backend REST APIs using **Axios** or the **Fetch API**.
+
+**Examples:**
+
+* User Authentication API
+* Cab API
+* Booking API
+
+---
+
+### `src/context/`
+
+Stores global state using the **React Context API**.
+
+Common use cases include:
+
+* Logged-in user
+* Authentication status
+* Theme settings
+* Application-wide state
+
+---
+
+### `src/hooks/`
+
+Contains reusable custom React hooks.
+
+**Examples:**
+
+* Authentication Hook
+* API Hook
+* Form Validation Hook
+
+---
+
+### `src/utils/`
+
+Contains helper functions used across the application.
+
+**Examples:**
+
+* Date Formatting
+* Input Validation
+* Common Utility Functions
+
+---
+
+### `App.jsx`
+
+The root component of the application.
+
+**Responsibilities:**
+
+* Defines the application layout
+* Configures routing
+* Renders shared components
+* Manages overall application structure
+
+---
+
+### `main.jsx`
+
+The main entry point of the React application.
+
+**Responsibilities:**
+
+* Renders the React application
+* Wraps the application with required providers
+* Mounts the application to the DOM
+
+---
+
+## Frontend Component Flow
+
+```text
+User
+   │
+   ▼
+React Components
+   │
+   ▼
+Pages
+   │
+   ▼
+Services (API Calls)
+   │
+   ▼
+Backend REST API
+   │
+   ▼
+MongoDB Database
+   │
+   ▼
+API Response
+   │
+   ▼
+Update React State
+   │
+   ▼
+Render Updated UI
+```
+
+---
+
+## Benefits of This Frontend Structure
+
+* **Component Reusability:** UI components can be reused across multiple pages, reducing code duplication.
+* **Modular Design:** Features are organized into separate folders, making the project easier to navigate.
+* **Scalability:** New pages, components, and services can be added without affecting the existing codebase.
+* **Maintainability:** A clear folder structure simplifies debugging, updates, and future enhancements.
+* **Separation of Concerns:** UI, business logic, and API communication are kept independent.
+* **State Management:** React Context API provides centralized state management for shared application data.
+* **Efficient Development:** Vite offers fast development, hot module replacement (HMR), and optimized production builds.
+
+This frontend structure provides a **clean, scalable, and maintainable** foundation for the Cab Booking Application, enabling efficient development and seamless integration with the backend APIs.
